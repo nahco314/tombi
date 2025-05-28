@@ -1,4 +1,5 @@
 use super::JsonCatalogSchema;
+use tombi_url::url_from_file_path;
 
 pub const DEFAULT_CATALOG_URL: &str = "https://www.schemastore.org/api/json/catalog.json";
 
@@ -14,6 +15,19 @@ impl CatalogUrl {
     #[inline]
     pub fn new(url: url::Url) -> Self {
         Self(url)
+    }
+    
+    #[inline]
+    pub fn new_unchecked(url: String) -> Self {
+        Self(url::Url::parse(&url).expect("Invalid URL"))
+    }
+    
+    #[inline]
+    pub fn from_file_path<P: AsRef<std::path::Path>>(path: P) -> Result<Self, ()> {
+        match url_from_file_path(path) {
+            Ok(url) => Ok(Self(url)),
+            Err(_) => Err(()),
+        }
     }
 }
 

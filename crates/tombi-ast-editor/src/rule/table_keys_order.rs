@@ -3,13 +3,13 @@ use std::borrow::Cow;
 use indexmap::IndexMap;
 use itertools::Itertools;
 use tombi_ast::AstNode;
+use tombi_future::{BoxFuture, Boxable};
 use tombi_schema_store::{
     AllOfSchema, AnyOfSchema, CurrentSchema, OneOfSchema, PropertySchema, SchemaAccessor,
     SchemaContext, ValueSchema,
 };
 use tombi_syntax::SyntaxElement;
 use tombi_validator::Validate;
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
 use tombi_x_keyword::TableKeysOrder;
 
 pub async fn table_keys_order<'a>(

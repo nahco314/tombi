@@ -1,6 +1,6 @@
 use tombi_config::TomlVersion;
 use tombi_document_tree::dig_keys;
-use tower_lsp::lsp_types::{TextDocumentIdentifier, Url};
+use tower_lsp::lsp_types::TextDocumentIdentifier;
 
 pub enum DocumentLinkToolTip {
     Catalog,
@@ -10,8 +10,8 @@ pub enum DocumentLinkToolTip {
 impl std::fmt::Display for DocumentLinkToolTip {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            DocumentLinkToolTip::Catalog => write!(f, "Open Catalog"),
-            DocumentLinkToolTip::Schema => write!(f, "Open Schema"),
+            DocumentLinkToolTip::Catalog => write!(f, "Open JSON Schema Catalog"),
+            DocumentLinkToolTip::Schema => write!(f, "Open JSON Schema"),
         }
     }
 }
@@ -35,7 +35,7 @@ pub async fn document_link(
     if let Some((_, tombi_document_tree::Value::String(path))) =
         dig_keys(document_tree, &["schema", "catalog", "path"])
     {
-        if let Some(target) = str2url(path.value(), &tombi_toml_path) {
+        if let Some(target) = crate::str2url(path.value(), &tombi_toml_path) {
             document_links.push(tombi_extension::DocumentLink {
                 target,
                 range: path.unquoted_range(),
@@ -54,7 +54,7 @@ pub async fn document_link(
             let Some(tombi_document_tree::Value::String(path)) = table.get("path") else {
                 continue;
             };
-            let Some(target) = str2url(path.value(), &tombi_toml_path) else {
+            let Some(target) = crate::str2url(path.value(), &tombi_toml_path) else {
                 continue;
             };
 
@@ -71,22 +71,4 @@ pub async fn document_link(
     }
 
     Ok(Some(document_links))
-}
-
-fn str2url(url: &str, tombi_toml_path: &std::path::Path) -> Option<Url> {
-    if let Ok(target) = Url::parse(url) {
-        Some(target)
-    } else if let Some(tombi_config_dir) = tombi_toml_path.parent() {
-        let mut file_path = std::path::PathBuf::from(url);
-        if file_path.is_relative() {
-            file_path = tombi_config_dir.join(file_path);
-        }
-        if file_path.exists() {
-            Url::from_file_path(file_path).ok()
-        } else {
-            None
-        }
-    } else {
-        None
-    }
 }

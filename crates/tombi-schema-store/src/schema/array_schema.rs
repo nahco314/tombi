@@ -1,5 +1,6 @@
 use std::{borrow::Cow, sync::Arc};
 
+use tombi_future::{BoxFuture, Boxable};
 use tombi_x_keyword::{ArrayValuesOrder, X_TOMBI_ARRAY_VALUES_ORDER};
 
 use super::{
@@ -7,7 +8,6 @@ use super::{
     ValueSchema,
 };
 use crate::{Accessor, SchemaStore};
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
 
 #[derive(Debug, Default, Clone)]
 pub struct ArraySchema {
@@ -18,6 +18,9 @@ pub struct ArraySchema {
     pub min_items: Option<usize>,
     pub max_items: Option<usize>,
     pub unique_items: Option<bool>,
+    pub enumerate: Option<Vec<tombi_json::Value>>,
+    pub default: Option<tombi_json::Value>,
+    pub examples: Option<Vec<tombi_json::Value>>,
     pub values_order: Option<ArrayValuesOrder>,
     pub deprecated: Option<bool>,
 }
@@ -44,6 +47,18 @@ impl ArraySchema {
                 .get("maxItems")
                 .and_then(|v| v.as_u64().map(|n| n as usize)),
             unique_items: object.get("uniqueItems").and_then(|v| v.as_bool()),
+            enumerate: object
+                .get("enum")
+                .and_then(|v| v.as_array())
+                .map(|array| array.items.iter().map(|v| v.into()).collect()),
+            default: object
+                .get("default")
+                .and_then(|v| v.as_array())
+                .map(|array| array.into()),
+            examples: object
+                .get("examples")
+                .and_then(|v| v.as_array())
+                .map(|array| array.items.iter().map(|v| v.into()).collect()),
             values_order: object
                 .get(X_TOMBI_ARRAY_VALUES_ORDER)
                 // NOTE: support old name

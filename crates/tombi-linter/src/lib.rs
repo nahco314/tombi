@@ -2,15 +2,15 @@ mod error;
 mod lint;
 mod linter;
 mod rule;
-mod warning;
+mod severity;
 
 pub use error::{Error, ErrorKind};
 use lint::Lint;
 pub use linter::Linter;
 use rule::Rule;
+pub use severity::{Severity, SeverityKind};
 pub use tombi_config::LintOptions;
 use tombi_diagnostic::Diagnostic;
-pub use warning::{Warning, WarningKind};
 
 #[cfg(test)]
 #[macro_export]
@@ -265,7 +265,7 @@ mod tests {
                 "" = 1
                 "#,
             ) -> Err([
-                crate::WarningKind::KeyEmpty
+                crate::SeverityKind::KeyEmpty
             ]);
         }
 

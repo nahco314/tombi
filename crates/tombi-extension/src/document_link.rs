@@ -4,12 +4,12 @@ pub struct DocumentLink {
     pub tooltip: String,
 }
 
-impl Into<tower_lsp::lsp_types::DocumentLink> for DocumentLink {
-    fn into(self) -> tower_lsp::lsp_types::DocumentLink {
+impl From<DocumentLink> for tower_lsp::lsp_types::DocumentLink {
+    fn from(value: DocumentLink) -> Self {
         tower_lsp::lsp_types::DocumentLink {
-            range: self.range.into(),
-            target: Some(self.target),
-            tooltip: Some(self.tooltip),
+            range: value.range.into(),
+            target: Some(value.target),
+            tooltip: Some(value.tooltip),
             data: None,
         }
     }

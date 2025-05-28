@@ -2,8 +2,8 @@ use std::borrow::Cow;
 
 use itertools::Itertools;
 use tombi_document_tree::IntoDocumentTreeAndErrors;
+use tombi_future::{BoxFuture, Boxable};
 use tombi_schema_store::{CurrentSchema, GetHeaderSchemarAccessors, SchemaAccessor};
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
 
 use crate::{edit::get_schema, rule::table_keys_order};
 

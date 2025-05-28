@@ -166,7 +166,7 @@ fn document_link_for_dependency(
         if let Some(tombi_document_tree::Value::String(subcrate_path)) = table.get("path") {
             if let Some((subcrate_cargo_toml_path, subcrate_document_tree)) =
                 get_path_crate_cargo_toml(
-                    &crate_cargo_toml_path,
+                    crate_cargo_toml_path,
                     std::path::Path::new(subcrate_path.value()),
                     toml_version,
                 )

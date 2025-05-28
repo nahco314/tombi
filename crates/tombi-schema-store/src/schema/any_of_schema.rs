@@ -12,6 +12,7 @@ pub struct AnyOfSchema {
     pub range: tombi_text::Range,
     pub schemas: ReferableValueSchemas,
     pub default: Option<tombi_json::Value>,
+    pub examples: Option<Vec<tombi_json::Value>>,
     pub deprecated: Option<bool>,
 }
 
@@ -43,6 +44,10 @@ impl AnyOfSchema {
             description,
             schemas: Arc::new(tokio::sync::RwLock::new(schemas)),
             default: object.get("default").cloned().map(|v| v.into()),
+            examples: object
+                .get("examples")
+                .and_then(|v| v.as_array())
+                .map(|array| array.items.iter().map(|v| v.into()).collect()),
             deprecated: object.get("deprecated").and_then(|v| v.as_bool()),
             range: object.range,
         }

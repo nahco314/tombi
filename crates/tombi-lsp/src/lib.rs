@@ -1,6 +1,7 @@
 pub mod backend;
 mod completion;
 mod document;
+mod goto_definition;
 mod goto_type_definition;
 pub mod handler;
 mod hover;

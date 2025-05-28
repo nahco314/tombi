@@ -89,12 +89,10 @@ impl GetTypeDefinition for tombi_schema_store::BooleanSchema {
         _schema_context: &'a tombi_schema_store::SchemaContext,
     ) -> BoxFuture<'b, Option<TypeDefinition>> {
         async move {
-            current_schema.map(|schema| {
-                TypeDefinition::new(
-                    schema.schema_url.as_ref().clone(),
-                    accessors.iter().map(Into::into).collect_vec(),
-                    schema.value_schema.range(),
-                )
+            current_schema.map(|schema| TypeDefinition {
+                schema_url: schema.schema_url.as_ref().clone(),
+                schema_accessors: accessors.iter().map(Into::into).collect_vec(),
+                range: schema.value_schema.range(),
             })
         }
         .boxed()

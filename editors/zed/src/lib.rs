@@ -39,7 +39,7 @@ impl TombiExtension {
         }
 
         if let Some(path) = &self.cached_binary_path {
-            if fs::metadata(path).map_or(false, |stat| stat.is_file()) {
+            if fs::metadata(path).is_ok_and(|stat| stat.is_file()) {
                 return Ok(TombiBinary {
                     path: path.clone(),
                     args: binary_args,
@@ -96,11 +96,11 @@ impl TombiExtension {
         fs::create_dir_all(&version_dir)
             .map_err(|err| format!("failed to create directory '{version_dir}': {err}"))?;
         let binary_path = match platform {
-            zed::Os::Windows => format!("{version_dir}"),
+            zed::Os::Windows => version_dir.to_string(),
             _ => format!("{version_dir}/tombi"),
         };
 
-        if !fs::metadata(&binary_path).map_or(false, |stat| stat.is_file()) {
+        if !fs::metadata(&binary_path).is_ok_and(|stat| stat.is_file()) {
             zed::set_language_server_installation_status(
                 language_server_id,
                 &zed::LanguageServerInstallationStatus::Downloading,

@@ -9,6 +9,8 @@ exclude = ["node_modules/**/*"]
 [format]
 
 [lint]
+[lint.rules]
+key-empty = "warn"
 
 [lsp]
 document-link = { enabled = true }

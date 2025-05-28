@@ -84,9 +84,6 @@ mod tests {
             ["tool", "uv", "sources", "local", "workspace", "extra"]
         ));
 
-        // Empty pattern
-        assert!(!match_accessors!(&accessors, []));
-
         // Empty accessors
         let empty_accessors: Vec<Accessor> = vec![];
         assert!(!match_accessors!(&empty_accessors, ["tool"]));

@@ -7,6 +7,7 @@ pub struct StringSchema {
     pub max_length: Option<usize>,
     pub pattern: Option<String>,
     pub enumerate: Option<Vec<String>>,
+    pub examples: Option<Vec<String>>,
     pub default: Option<String>,
     pub deprecated: Option<bool>,
 }
@@ -31,6 +32,13 @@ impl StringSchema {
                 .get("pattern")
                 .and_then(|v| v.as_str().map(|s| s.to_string())),
             enumerate: object.get("enum").and_then(|v| v.as_array()).map(|a| {
+                a.items
+                    .iter()
+                    .filter_map(|v| v.as_str())
+                    .map(ToString::to_string)
+                    .collect()
+            }),
+            examples: object.get("examples").and_then(|v| v.as_array()).map(|a| {
                 a.items
                     .iter()
                     .filter_map(|v| v.as_str())

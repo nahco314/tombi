@@ -1,8 +1,6 @@
 use itertools::Either;
 use tombi_document_tree::IntoDocumentTreeAndErrors;
-use tower_lsp::lsp_types::{
-    GotoDefinitionParams, GotoDefinitionResponse, TextDocumentPositionParams,
-};
+use tower_lsp::lsp_types::{GotoDefinitionParams, TextDocumentPositionParams};
 
 use crate::handler::hover::{get_hover_accessors, get_hover_keys_and_range};
 use crate::Backend;
@@ -11,7 +9,7 @@ use crate::Backend;
 pub async fn handle_goto_definition(
     backend: &Backend,
     params: GotoDefinitionParams,
-) -> Result<Option<GotoDefinitionResponse>, tower_lsp::jsonrpc::Error> {
+) -> Result<Option<Vec<tombi_extension::DefinitionLocation>>, tower_lsp::jsonrpc::Error> {
     tracing::info!("handle_goto_definition");
     tracing::trace!(?params);
 
@@ -34,16 +32,16 @@ pub async fn handle_goto_definition(
         .value()
     {
         tracing::debug!("`server.goto_definition.enabled` is false");
-        return Ok(None);
+        return Ok(Default::default());
     }
 
     let Some(root) = backend.get_incomplete_ast(&text_document.uri).await else {
-        return Ok(None);
+        return Ok(Default::default());
     };
 
     let source_schema = backend
         .schema_store
-        .build_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
+        .resolve_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
         .await
         .ok()
         .flatten();
@@ -52,7 +50,7 @@ pub async fn handle_goto_definition(
 
     let position = position.into();
     let Some((keys, _)) = get_hover_keys_and_range(&root, position, toml_version).await else {
-        return Ok(None);
+        return Ok(Default::default());
     };
 
     let document_tree = root.into_document_tree_and_errors(toml_version).tree;
@@ -80,5 +78,16 @@ pub async fn handle_goto_definition(
         return Ok(locations.into());
     }
 
-    Ok(None)
+    if let Some(locations) = tombi_extension_tombi::goto_definition(
+        &text_document,
+        &document_tree,
+        &accessors,
+        toml_version,
+    )
+    .await?
+    {
+        return Ok(locations.into());
+    }
+
+    Ok(Default::default())
 }

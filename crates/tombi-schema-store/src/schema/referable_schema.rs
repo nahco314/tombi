@@ -3,7 +3,7 @@ use std::borrow::Cow;
 use crate::x_taplo::XTaplo;
 
 use super::{AllOfSchema, AnyOfSchema, OneOfSchema, SchemaDefinitions, SchemaUrl, ValueSchema};
-use tombi_wasm_compat::box_future::BoxFuture;
+use tombi_future::BoxFuture;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Referable<T> {
@@ -125,7 +125,7 @@ impl Referable<ValueSchema> {
                         let schema_url = SchemaUrl::parse(reference)?;
 
                         if let Some(mut document_schema) =
-                            schema_store.get_document_schema(&schema_url).await?
+                            schema_store.try_get_document_schema(&schema_url).await?
                         {
                             if let Some(value_schema) = &mut document_schema.value_schema {
                                 if title.is_some() || description.is_some() {
@@ -173,7 +173,7 @@ impl Referable<ValueSchema> {
                         match reference_url {
                             Some(reference_url) => {
                                 if let Some(document_schema) =
-                                    schema_store.get_document_schema(reference_url).await?
+                                    schema_store.try_get_document_schema(reference_url).await?
                                 {
                                     (
                                         Cow::Owned(document_schema.schema_url),

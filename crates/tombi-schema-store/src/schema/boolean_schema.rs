@@ -5,6 +5,7 @@ pub struct BooleanSchema {
     pub range: tombi_text::Range,
     pub default: Option<bool>,
     pub enumerate: Option<Vec<bool>>,
+    pub examples: Option<Vec<bool>>,
     pub deprecated: Option<bool>,
 }
 
@@ -21,6 +22,10 @@ impl BooleanSchema {
             enumerate: object
                 .get("enum")
                 .and_then(|value| value.as_array())
+                .map(|array| array.items.iter().filter_map(|v| v.as_bool()).collect()),
+            examples: object
+                .get("examples")
+                .and_then(|v| v.as_array())
                 .map(|array| array.items.iter().filter_map(|v| v.as_bool()).collect()),
             deprecated: object.get("deprecated").and_then(|v| v.as_bool()),
             range: object.range,

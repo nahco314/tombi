@@ -23,10 +23,12 @@ use tombi_schema_store::{
     ValueSchema,
 };
 use tombi_syntax::{SyntaxElement, SyntaxKind};
+use tower_lsp::lsp_types::Url;
 
 pub async fn get_completion_contents(
     root: tombi_ast::Root,
     position: tombi_text::Position,
+    text_document_uri: &Url,
     schema_context: &tombi_schema_store::SchemaContext<'_>,
 ) -> Vec<CompletionContent> {
     let mut keys: Vec<tombi_document_tree::Key> = vec![];
@@ -47,7 +49,7 @@ pub async fn get_completion_contents(
 
         if let Some(SyntaxElement::Token(token)) = node.first_child_or_token() {
             if token.kind() == SyntaxKind::COMMENT && token.range().contains(position) {
-                return get_comment_completion_contents(&root, position);
+                return get_comment_completion_contents(&root, position, text_document_uri);
             }
         }
 

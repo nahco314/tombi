@@ -1,4 +1,4 @@
-use tombi_wasm_compat::url::url_from_file_path;
+use tombi_url::url_from_file_path;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Deserialize)]
 pub struct SchemaUrl(url::Url);

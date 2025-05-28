@@ -5,13 +5,13 @@ use crate::{
 use ahash::AHashMap;
 use async_trait::async_trait;
 use bytes::Bytes;
-use itertools::{Either, Itertools};
+use itertools::Either;
 use std::fmt::Debug;
 use std::{ops::Deref, sync::Arc};
 use tokio::sync::RwLock;
-use tombi_config::{Schema, SchemaOptions};
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
-use tombi_wasm_compat::url::url_to_file_path;
+use tombi_config::SchemaOptions;
+use tombi_future::{BoxFuture, Boxable};
+use tombi_url::url_to_file_path;
 
 // todo: strip dependency to reqwest!
 
@@ -65,7 +65,7 @@ impl DefaultClient {
 #[async_trait(?Send)]
 impl HttpClient for DefaultClient {
     async fn get_bytes(&self, url: &str) -> Result<Bytes, String> {
-        let mut response = gloo_net::http::Request::get(url)
+        let response = gloo_net::http::Request::get(url)
             .send()
             .await
             .map_err(|err| err.to_string())?;
@@ -77,7 +77,7 @@ impl HttpClient for DefaultClient {
 
 #[derive(Debug, Clone)]
 pub struct SchemaStore {
-    http_client: Arc<dyn HttpClient>,
+    http_client: Arc<dyn HttpClient + Send + Sync>,
     document_schemas:
         Arc<tokio::sync::RwLock<AHashMap<SchemaUrl, Result<DocumentSchema, crate::Error>>>>,
     schemas: Arc<RwLock<Vec<crate::Schema>>>,
@@ -151,34 +151,43 @@ impl SchemaStore {
             )
             .await;
 
-            let catalog_paths = schema_options.catalog_paths().unwrap_or_default();
-
-            futures::future::join_all(catalog_paths.iter().map(|catalog_path| async move {
-                let Ok(catalog_url) = catalog_path.try_to_catalog_url(base_dirpath) else {
-                    return Err(crate::Error::CatalogPathConvertUrlFailed {
-                        catalog_path: catalog_path.to_string(),
-                    });
-                };
-                let catalog_url = CatalogUrl::new(catalog_url);
-                self.load_schemas_from_catalog_url(&catalog_url).await
-            }))
-            .await
-            .into_iter()
-            .collect::<Result<(), _>>()?;
+            if let Some(catalog) = &schema_options.catalog {
+                if let Some(paths) = &catalog.path {
+                    for catalog_path in paths.as_ref() {
+                        let catalog_url = catalog_path
+                            .try_to_catalog_url(base_dirpath)
+                            .map(CatalogUrl::new)
+                            .map_err(|_| crate::Error::InvalidCatalogFileUrl {
+                                catalog_url: CatalogUrl::new_unchecked(catalog_path.value().to_string()),
+                            })?;
+                        if let Err(err) = self.load_schemas_from_catalog_url(&catalog_url).await {
+                            tracing::error!("Failed to load catalog from {}: {}", catalog_url, err);
+                        }
+                    }
+                }
+            }
         }
 
         Ok(())
     }
 
-    pub async fn load_schemas(&self, schemas: &[Schema], base_dirpath: Option<&std::path::Path>) {
+    async fn load_schemas<'a>(
+        &self,
+        schemas: &'a [tombi_config::Schema],
+        base_dirpath: Option<&std::path::Path>,
+    ) {
         futures::future::join_all(schemas.iter().map(|schema| async move {
-            let schema_url = if let Ok(schema_url) = SchemaUrl::parse(schema.path()) {
+            let schema_url = if let Some(base_dirpath) = base_dirpath {
+                let schema_path = base_dirpath.join(schema.path());
+                SchemaUrl::from_file_path(&schema_path)
+            } else {
+                SchemaUrl::from_file_path(schema.path())
+            };
+
+            let schema_url = if let Ok(schema_url) = schema_url {
                 schema_url
-            } else if let Ok(schema_url) = match base_dirpath {
-                Some(base_dirpath) => SchemaUrl::from_file_path(base_dirpath.join(schema.path())),
-                None => SchemaUrl::from_file_path(schema.path()),
-            } {
-                schema_url
+            } else if let Ok(schema_url) = url::Url::parse(schema.path()) {
+                SchemaUrl::new(schema_url)
             } else {
                 tracing::error!("invalid schema path: {}", schema.path());
                 return;
@@ -288,7 +297,7 @@ impl SchemaStore {
         schema_url: &SchemaUrl,
         schema_content: &str,
     ) -> Result<DocumentSchema, crate::Error> {
-        let tombi_json::ValueNode::Object(schema) = tombi_json::ValueNode::from_str(schema_content)
+        let tombi_json::ValueNode::Object(schema) = schema_content.parse::<tombi_json::ValueNode>()
             .map_err(|err| crate::Error::SchemaFileParseFailed {
                 schema_url: schema_url.to_owned(),
                 reason: err.to_string(),
@@ -360,7 +369,7 @@ impl SchemaStore {
         Ok(DocumentSchema::new(schema, schema_url.clone()))
     }
 
-    pub fn get_document_schema<'a: 'b, 'b>(
+    pub fn try_get_document_schema<'a: 'b, 'b>(
         &'a self,
         schema_url: &'a SchemaUrl,
     ) -> BoxFuture<'b, Result<Option<DocumentSchema>, crate::Error>> {
@@ -389,22 +398,17 @@ impl SchemaStore {
     }
 
     #[inline]
-    async fn get_remote_source_schema(
+    async fn try_get_source_schema_from_remote_url(
         &self,
         schema_url: &SchemaUrl,
     ) -> Result<Option<SourceSchema>, crate::Error> {
-        if self.offline() && matches!(schema_url.scheme(), "http" | "https") {
-            tracing::debug!("offline mode, skip fetch schema: {}", schema_url);
-            return Ok(None);
-        }
-
         Ok(Some(SourceSchema {
-            root_schema: self.get_document_schema(schema_url).await?,
+            root_schema: self.try_get_document_schema(schema_url).await?,
             sub_schema_url_map: Default::default(),
         }))
     }
 
-    pub async fn build_source_schema_from_ast(
+    pub async fn resolve_source_schema_from_ast(
         &self,
         root: &tombi_ast::Root,
         source_url_or_path: Option<Either<&url::Url, &std::path::Path>>,
@@ -431,14 +435,14 @@ impl SchemaStore {
                 }
             };
             return self
-                .get_remote_source_schema(&SchemaUrl::new(schema_url))
+                .try_get_source_schema_from_remote_url(&SchemaUrl::new(schema_url))
                 .await
                 .map_err(|err| (err, url_range));
         }
 
         if let Some(source_url_or_path) = source_url_or_path {
             Ok(self
-                .build_source_schema(source_url_or_path)
+                .resolve_source_schema(source_url_or_path)
                 .await
                 .ok()
                 .flatten())
@@ -447,7 +451,7 @@ impl SchemaStore {
         }
     }
 
-    async fn build_source_schema_from_path(
+    async fn resolve_source_schema_from_path(
         &self,
         source_path: &std::path::Path,
     ) -> Result<Option<SourceSchema>, crate::Error> {
@@ -472,7 +476,7 @@ impl SchemaStore {
         let mut source_schema: Option<SourceSchema> = None;
         for matching_schema in matching_schemas {
             let document_schema = match &matching_schema.spec {
-                SchemaSpec::Url(url) => self.get_document_schema(url).await,
+                SchemaSpec::Url(url) => self.try_get_document_schema(url).await,
                 SchemaSpec::Raw(url, content) => {
                     self.parse_raw_schema(url, content).await.map(|d| Some(d))
                 }
@@ -523,25 +527,22 @@ impl SchemaStore {
         Ok(source_schema)
     }
 
-    async fn build_source_schema_from_url(
+    async fn resolve_source_schema_from_url(
         &self,
         source_url: &url::Url,
     ) -> Result<Option<SourceSchema>, crate::Error> {
         match source_url.scheme() {
             "file" => {
-                let source_path = url_to_file_path(source_url).map_err(|_| {
-                    crate::Error::SourceUrlParseFailed {
-                        source_url: source_url.to_owned(),
-                    }
-                })?;
-                self.build_source_schema_from_path(&source_path).await
+                let source_path =
+                    source_url
+                        .to_file_path()
+                        .map_err(|_| crate::Error::SourceUrlParseFailed {
+                            source_url: source_url.to_owned(),
+                        })?;
+                self.resolve_source_schema_from_path(&source_path).await
             }
             "http" | "https" => {
-                if self.offline() {
-                    tracing::debug!("offline mode, skip fetch source from url: {}", source_url);
-                    return Ok(None);
-                }
-                self.get_remote_source_schema(&SchemaUrl::new(source_url.clone()))
+                self.try_get_source_schema_from_remote_url(&SchemaUrl::new(source_url.clone()))
                     .await
             }
             "untitled" => Ok(None),
@@ -551,13 +552,13 @@ impl SchemaStore {
         }
     }
 
-    async fn build_source_schema(
+    async fn resolve_source_schema(
         &self,
         source_url_or_path: Either<&url::Url, &std::path::Path>,
     ) -> Result<Option<SourceSchema>, crate::Error> {
         match source_url_or_path {
-            Either::Left(source_url) => self.build_source_schema_from_url(source_url).await,
-            Either::Right(source_path) => self.build_source_schema_from_path(source_path).await,
+            Either::Left(source_url) => self.resolve_source_schema_from_url(source_url).await,
+            Either::Right(source_path) => self.resolve_source_schema_from_path(source_path).await,
         }
         .inspect(|source_schema| {
             if let Some(source_schema) = source_schema {

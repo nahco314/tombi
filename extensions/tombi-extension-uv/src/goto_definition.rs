@@ -1,5 +1,4 @@
 use tombi_config::TomlVersion;
-use tombi_extension::DefinitionLocations;
 use tombi_schema_store::match_accessors;
 use tower_lsp::lsp_types::TextDocumentIdentifier;
 
@@ -12,13 +11,13 @@ pub async fn goto_definition(
     document_tree: &tombi_document_tree::DocumentTree,
     accessors: &[tombi_schema_store::Accessor],
     toml_version: TomlVersion,
-) -> Result<Option<tombi_extension::DefinitionLocations>, tower_lsp::jsonrpc::Error> {
+) -> Result<Option<Vec<tombi_extension::DefinitionLocation>>, tower_lsp::jsonrpc::Error> {
     // Check if current file is pyproject.toml
     if !text_document.uri.path().ends_with("pyproject.toml") {
-        return Ok(None);
+        return Ok(Default::default());
     }
     let Ok(pyproject_toml_path) = text_document.uri.to_file_path() else {
-        return Ok(None);
+        return Ok(Default::default());
     };
 
     let locations = if match_accessors!(accessors[..3], ["tool", "uv", "sources"]) {
@@ -44,5 +43,5 @@ pub async fn goto_definition(
         return Ok(None);
     }
 
-    Ok(Some(DefinitionLocations(locations)))
+    Ok(Some(locations))
 }

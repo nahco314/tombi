@@ -15,8 +15,24 @@ impl Accessor {
     }
 
     #[inline]
+    pub fn as_key(&self) -> Option<&str> {
+        match self {
+            Accessor::Key(key) => Some(key),
+            _ => None,
+        }
+    }
+
+    #[inline]
     pub fn is_index(&self) -> bool {
         matches!(self, Accessor::Index(_))
+    }
+
+    #[inline]
+    pub fn as_index(&self) -> Option<usize> {
+        match self {
+            Accessor::Index(index) => Some(*index),
+            _ => None,
+        }
     }
 }
 

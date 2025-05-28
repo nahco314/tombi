@@ -22,7 +22,7 @@ mod value_schema;
 use std::borrow::Cow;
 use std::fmt::Display;
 use std::sync::Arc;
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
+use tombi_future::BoxFuture;
 
 use crate::{Accessor, SchemaStore};
 pub use all_of_schema::AllOfSchema;

@@ -3,7 +3,7 @@ use tombi_schema_store::{Accessor, CurrentSchema, LocalDateTimeSchema, ValueSche
 
 use crate::hover::{
     all_of::get_all_of_hover_content, any_of::get_any_of_hover_content,
-    constraints::DataConstraints, default_value::DefaultValue, one_of::get_one_of_hover_content,
+    constraints::ValueConstraints, display_value::DisplayValue, one_of::get_one_of_hover_content,
     GetHoverContent, HoverContent,
 };
 
@@ -104,15 +104,23 @@ impl GetHoverContent for LocalDateTimeSchema {
                 description: self.description.clone(),
                 accessors: tombi_schema_store::Accessors::new(accessors.to_vec()),
                 value_type: tombi_schema_store::ValueType::LocalDateTime,
-                constraints: Some(DataConstraints {
-                    default: self
-                        .default
-                        .as_ref()
-                        .map(|value| DefaultValue::LocalDateTime(value.clone())),
+                constraints: Some(ValueConstraints {
                     enumerate: self.enumerate.as_ref().map(|value| {
                         value
                             .iter()
-                            .map(|value| DefaultValue::LocalDateTime(value.clone()))
+                            .filter_map(|value| DisplayValue::try_new_local_date_time(value).ok())
+                            .collect()
+                    }),
+                    default: self
+                        .default
+                        .as_ref()
+                        .and_then(|value| DisplayValue::try_new_local_date_time(value).ok()),
+                    examples: self.examples.as_ref().map(|examples| {
+                        examples
+                            .iter()
+                            .filter_map(|example| {
+                                DisplayValue::try_new_local_date_time(example).ok()
+                            })
                             .collect()
                     }),
                     ..Default::default()

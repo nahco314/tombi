@@ -35,15 +35,10 @@ fn load_cargo_toml(
     cargo_toml_path: &std::path::Path,
     toml_version: TomlVersion,
 ) -> Option<tombi_document_tree::DocumentTree> {
-    let Some(toml_text) = std::fs::read_to_string(cargo_toml_path).ok() else {
-        return None;
-    };
+    let toml_text = std::fs::read_to_string(cargo_toml_path).ok()?;
 
-    let Some(root) =
-        tombi_ast::Root::cast(tombi_parser::parse(&toml_text, toml_version).into_syntax_node())
-    else {
-        return None;
-    };
+    let root =
+        tombi_ast::Root::cast(tombi_parser::parse(&toml_text, toml_version).into_syntax_node())?;
 
     root.try_into_document_tree(toml_version).ok()
 }
@@ -52,9 +47,7 @@ fn find_workspace_cargo_toml(
     cargo_toml_path: &std::path::Path,
     toml_version: TomlVersion,
 ) -> Option<(std::path::PathBuf, tombi_document_tree::DocumentTree)> {
-    let Some(mut current_dir) = cargo_toml_path.parent() else {
-        return None;
-    };
+    let mut current_dir = cargo_toml_path.parent()?;
 
     while let Some(target_dir) = current_dir.parent() {
         current_dir = target_dir;
@@ -96,9 +89,7 @@ fn get_path_crate_cargo_toml(
         return None;
     }
 
-    let Some(document_tree) = load_cargo_toml(&subcrate_cargo_toml_path, toml_version) else {
-        return None;
-    };
+    let document_tree = load_cargo_toml(&subcrate_cargo_toml_path, toml_version)?;
 
     Some((subcrate_cargo_toml_path, document_tree))
 }

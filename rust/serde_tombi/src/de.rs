@@ -91,12 +91,12 @@ impl Deserializer<'_> {
     where
         T: DeserializeOwned,
     {
-        let toml_version = self.get_toml_version(&toml_text).await?;
+        let toml_version = self.get_toml_version(toml_text).await?;
         let parsed = tombi_parser::parse(toml_text, toml_version);
         let root = tombi_ast::Root::cast(parsed.syntax_node()).expect("AST Root must be present");
         // Check if there are any parsing errors
         if !parsed.errors.is_empty() {
-            return Err(crate::de::Error::Parser(parsed.errors));
+            return Err(parsed.errors.into());
         }
         from_document(self.try_to_document(root, toml_version)?)
     }
@@ -150,7 +150,7 @@ impl Deserializer<'_> {
 
         if let Some(source_path) = self.source_path {
             match schema_store
-                .build_source_schema_from_ast(&root, Some(Either::Right(source_path)))
+                .resolve_source_schema_from_ast(&root, Some(Either::Right(source_path)))
                 .await
             {
                 Ok(Some(SourceSchema {
@@ -161,8 +161,8 @@ impl Deserializer<'_> {
                         toml_version = new_toml_version;
                     }
                 }
-                Err((error, url_range)) => {
-                    return Err(crate::de::Error::DocumentCommentSchemaUrl { error, url_range });
+                Err((error, _)) => {
+                    return Err(error.into());
                 }
                 _ => {}
             }
@@ -181,7 +181,7 @@ impl Deserializer<'_> {
 
         // Check for errors during document tree construction
         if !errors.is_empty() {
-            return Err(crate::de::Error::DocumentTree(errors));
+            return Err(errors.into());
         }
 
         // Convert to a Document
@@ -572,13 +572,13 @@ key4 = "value4"
         }
 
         let toml = r#"
-mixed = [42, 3.14, "hello", true]
+mixed = [42, 3.02, "hello", true]
 "#;
 
         let expected = MixedTypeArray {
             mixed: vec![
                 MixedType::Integer(42),
-                MixedType::Float(3.14),
+                MixedType::Float(3.02),
                 MixedType::String("hello".to_string()),
                 MixedType::Boolean(true),
             ],

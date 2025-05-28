@@ -676,6 +676,7 @@ mod tests {
 
     use super::*;
     use serde::Deserialize;
+    use std::str::FromStr;
 
     #[test]
     fn test_deserialize_null() {
@@ -704,10 +705,10 @@ mod tests {
         assert!(value_node.is_number());
         pretty_assertions::assert_eq!(value_node.as_f64(), Some(42.0));
 
-        let json = "-3.14";
+        let json = "-3.02";
         let value_node = ValueNode::from_str(json).unwrap();
         assert!(value_node.is_number());
-        pretty_assertions::assert_eq!(value_node.as_f64(), Some(-3.14));
+        pretty_assertions::assert_eq!(value_node.as_f64(), Some(-3.02));
     }
 
     #[test]
@@ -858,7 +859,7 @@ mod tests {
             Red,
             Green,
             Blue,
-            RGB(u8, u8, u8),
+            Rgb(u8, u8, u8),
             HexCode(String),
         }
 
@@ -866,9 +867,9 @@ mod tests {
         let color: Color = from_str(json).unwrap();
         pretty_assertions::assert_eq!(color, Color::Red);
 
-        let json = r#"{"RGB": [255, 255, 255]}"#;
+        let json = r#"{"Rgb": [255, 255, 255]}"#;
         let color: Color = from_str(json).unwrap();
-        pretty_assertions::assert_eq!(color, Color::RGB(255, 255, 255));
+        pretty_assertions::assert_eq!(color, Color::Rgb(255, 255, 255));
 
         let json = r###"{"HexCode": "#FFFFFF"}"###;
         let color: Color = from_str(json).unwrap();
@@ -961,5 +962,50 @@ mod tests {
             value_node.as_str(),
             Some("\u{0000}\u{0001}\u{0002}\u{0008}\u{000C}")
         );
+    }
+
+    #[test]
+    fn test_surrogate_pairs() {
+        // Test emoji using surrogate pairs (🎉 = U+1F389)
+        let json = r#""\uD83C\uDF89""#;
+        let value_node = ValueNode::from_str(json).unwrap();
+        assert!(value_node.is_string());
+        pretty_assertions::assert_eq!(value_node.as_str(), Some("🎉"));
+
+        // Test another emoji (😀 = U+1F600)
+        let json = r#""\uD83D\uDE00""#;
+        let value_node = ValueNode::from_str(json).unwrap();
+        assert!(value_node.is_string());
+        pretty_assertions::assert_eq!(value_node.as_str(), Some("😀"));
+
+        // Test mathematical alphanumeric symbols (𝐀 = U+1D400)
+        let json = r#""\uD835\uDC00""#;
+        let value_node = ValueNode::from_str(json).unwrap();
+        assert!(value_node.is_string());
+        pretty_assertions::assert_eq!(value_node.as_str(), Some("𝐀"));
+    }
+
+    #[test]
+    fn test_invalid_surrogate_pairs() {
+        // High surrogate without low surrogate
+        let json = r#""\uD800""#;
+        assert!(ValueNode::from_str(json).is_err());
+
+        // Low surrogate without high surrogate
+        let json = r#""\uDC00""#;
+        assert!(ValueNode::from_str(json).is_err());
+
+        // High surrogate followed by non-surrogate
+        let json = r#""\uD800\u0041""#;
+        assert!(ValueNode::from_str(json).is_err());
+    }
+
+    #[test]
+    fn test_mixed_surrogate_and_regular() {
+        // Mix of regular characters and surrogate pairs
+        let json = r#""Hello \uD83D\uDE00 World!""#;
+        let value_node = ValueNode::from_str(json).unwrap();
+        assert!(value_node.is_string());
+        pretty_assertions::assert_eq!(value_node.as_str(), Some("Hello 😀 World!"));
     }
 }

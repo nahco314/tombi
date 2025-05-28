@@ -1,7 +1,6 @@
 pub mod definitions;
 
 use std::fmt::Write;
-use std::time::Instant;
 use itertools::Either;
 use tombi_config::{DateTimeDelimiter, IndentStyle, LineEnding, TomlVersion};
 use tombi_diagnostic::{Diagnostic, SetDiagnostics};
@@ -51,7 +50,7 @@ impl<'a> Formatter<'a> {
             tombi_parser::parse_document_header_comments(source).cast::<tombi_ast::Root>()
         {
             self.schema_store
-                .build_source_schema_from_ast(&parsed.tree(), self.source_url_or_path)
+                .resolve_source_schema_from_ast(&parsed.tree(), self.source_url_or_path)
                 .await
                 .ok()
                 .flatten()

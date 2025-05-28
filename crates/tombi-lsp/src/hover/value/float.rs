@@ -3,7 +3,7 @@ use tombi_schema_store::{Accessor, CurrentSchema, FloatSchema, ValueSchema};
 
 use crate::hover::{
     all_of::get_all_of_hover_content, any_of::get_any_of_hover_content,
-    constraints::DataConstraints, default_value::DefaultValue, one_of::get_one_of_hover_content,
+    constraints::ValueConstraints, display_value::DisplayValue, one_of::get_one_of_hover_content,
     GetHoverContent, HoverContent,
 };
 
@@ -112,19 +112,25 @@ impl GetHoverContent for FloatSchema {
                 description: self.description.clone(),
                 accessors: tombi_schema_store::Accessors::new(accessors.to_vec()),
                 value_type: tombi_schema_store::ValueType::Float,
-                constraints: Some(DataConstraints {
-                    default: self.default.map(DefaultValue::Float),
+                constraints: Some(ValueConstraints {
                     enumerate: self.enumerate.as_ref().map(|value| {
                         value
                             .iter()
-                            .map(|value| DefaultValue::Float(*value))
+                            .map(|value| DisplayValue::Float(*value))
                             .collect()
                     }),
-                    minimum: self.minimum.map(DefaultValue::Float),
-                    maximum: self.maximum.map(DefaultValue::Float),
-                    exclusive_minimum: self.exclusive_minimum.map(DefaultValue::Float),
-                    exclusive_maximum: self.exclusive_maximum.map(DefaultValue::Float),
-                    multiple_of: self.multiple_of.map(DefaultValue::Float),
+                    default: self.default.map(DisplayValue::Float),
+                    examples: self.examples.as_ref().map(|examples| {
+                        examples
+                            .iter()
+                            .map(|example| DisplayValue::Float(*example))
+                            .collect()
+                    }),
+                    minimum: self.minimum.map(DisplayValue::Float),
+                    maximum: self.maximum.map(DisplayValue::Float),
+                    exclusive_minimum: self.exclusive_minimum.map(DisplayValue::Float),
+                    exclusive_maximum: self.exclusive_maximum.map(DisplayValue::Float),
+                    multiple_of: self.multiple_of.map(DisplayValue::Float),
                     ..Default::default()
                 }),
                 schema_url: current_schema.map(|schema| schema.schema_url.as_ref().clone()),

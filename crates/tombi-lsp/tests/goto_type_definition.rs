@@ -155,7 +155,6 @@ mod goto_type_definition_tests {
                     lsp_types::{
                         DidOpenTextDocumentParams, PartialResultParams, TextDocumentIdentifier,
                         TextDocumentItem, TextDocumentPositionParams, Url, WorkDoneProgressParams,
-                        request::GotoTypeDefinitionResponse,
                     },
                     LspService,
                 };
@@ -246,56 +245,11 @@ mod goto_type_definition_tests {
                 let expected_path = $expected_schema_path.to_owned();
 
                 match result {
-                    Some(def_links) => {
-                        // Handle different return types (single link or array)
-                        match def_links {
-                            GotoTypeDefinitionResponse::Link(links) => {
-                                assert!(!links.is_empty(), "Type definition links were returned but empty");
-
-                                let first_link = &links[0];
-                                let target_url = first_link.target_uri.clone();
-                                let target_path = target_url.to_file_path()
-                                    .expect("Failed to convert URL to file path");
-
-                                pretty_assertions::assert_eq!(
-                                    target_path,
-                                    expected_path,
-                                    "Type definition link points to an unexpected schema path\nExpected: {:?}\nActual: {:?}",
-                                    expected_path,
-                                    target_path
-                                );
-                            },
-                            GotoTypeDefinitionResponse::Scalar(location) => {
-                                let target_url = location.uri.clone();
-                                let target_path = target_url.to_file_path()
-                                    .expect("Failed to convert URL to file path");
-
-                                pretty_assertions::assert_eq!(
-                                    target_path,
-                                    expected_path,
-                                    "Type definition link points to an unexpected schema path\nExpected: {:?}\nActual: {:?}",
-                                    expected_path,
-                                    target_path
-                                );
-                            },
-                            GotoTypeDefinitionResponse::Array(locations) => {
-                                assert!(!locations.is_empty(), "Type definition locations were returned but empty");
-
-                                let first_location = &locations[0];
-                                let target_url = first_location.uri.clone();
-                                let target_path = target_url.to_file_path()
-                                    .expect("Failed to convert URL to file path");
-
-                                pretty_assertions::assert_eq!(
-                                    target_path,
-                                    expected_path,
-                                    "Type definition link points to an unexpected schema path\nExpected: {:?}\nActual: {:?}",
-                                    expected_path,
-                                    target_path
-                                );
-                            }
-                        }
-                    },
+                    Some(definition_links) => {
+                        pretty_assertions::assert_eq!(
+                            definition_links.into_iter().map(|link| link.uri.to_file_path().unwrap()).collect::<Vec<_>>(),
+                            vec![expected_path],
+                        );},
                     None => {
                         panic!("No type definition link was returned, but expected path: {:?}", expected_path);
                     }

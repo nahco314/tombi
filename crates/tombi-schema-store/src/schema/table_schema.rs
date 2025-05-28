@@ -2,8 +2,8 @@ use std::{borrow::Cow, sync::Arc};
 
 use ahash::AHashMap;
 use indexmap::IndexMap;
+use tombi_future::{BoxFuture, Boxable};
 use tombi_json::StringNode;
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
 use tombi_x_keyword::{TableKeysOrder, X_TOMBI_TABLE_KEYS_ORDER};
 
 use super::{
@@ -25,6 +25,9 @@ pub struct TableSchema {
     pub min_properties: Option<usize>,
     pub max_properties: Option<usize>,
     pub keys_order: Option<TableKeysOrder>,
+    pub default: Option<tombi_json::Object>,
+    pub enumerate: Option<Vec<tombi_json::Object>>,
+    pub examples: Option<Vec<tombi_json::Object>>,
     pub deprecated: Option<bool>,
 }
 
@@ -148,6 +151,25 @@ impl TableSchema {
                 .get("maxProperties")
                 .and_then(|v| v.as_u64().map(|u| u as usize)),
             keys_order,
+            enumerate: object_node.get("enum").and_then(|v| v.as_array()).map(|v| {
+                v.items
+                    .iter()
+                    .filter_map(|v| v.as_object().map(|v| v.into()))
+                    .collect()
+            }),
+            default: object_node
+                .get("default")
+                .and_then(|v| v.as_object())
+                .map(|v| v.into()),
+            examples: object_node
+                .get("examples")
+                .and_then(|v| v.as_array())
+                .map(|v| {
+                    v.items
+                        .iter()
+                        .filter_map(|v| v.as_object().map(|v| v.into()))
+                        .collect()
+                }),
             deprecated: object_node.get("deprecated").and_then(|v| v.as_bool()),
         }
     }

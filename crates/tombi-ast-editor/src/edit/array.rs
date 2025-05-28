@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
 use itertools::Itertools;
+use tombi_future::{BoxFuture, Boxable};
 use tombi_schema_store::ValueSchema;
 
 use crate::rule::{array_comma_tailing_comment, array_values_order};

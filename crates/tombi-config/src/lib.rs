@@ -7,7 +7,7 @@ mod types;
 
 pub use error::Error;
 pub use format::FormatOptions;
-pub use lint::LintOptions;
+pub use lint::{LintOptions, SeverityLevel};
 pub use schema::SchemaOptions;
 pub use schema::{RootSchema, Schema, SubSchema};
 pub use server::{LspCompletion, LspOptions};
@@ -75,6 +75,6 @@ pub struct Config {
 impl Config {
     pub fn lsp(&self) -> Option<&LspOptions> {
         #[allow(deprecated)]
-        self.lsp.as_ref().or_else(|| self.server.as_ref())
+        self.lsp.as_ref().or(self.server.as_ref())
     }
 }

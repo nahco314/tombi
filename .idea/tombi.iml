@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="EMPTY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-ast-editor/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-ast/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-config/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-date-time/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-date-time/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-diagnostic/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-diagnostic/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-document-tree/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-document/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-extension/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-formatter/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-formatter/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-json-lexer/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-json-lexer/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-json-syntax/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-json-value/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-json/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-lexer/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-lexer/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-linter/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-lsp/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-lsp/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-parser/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-rg-tree/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-schema-store/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-schema-store/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-syntax/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-test-lib/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-text/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-toml-text/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-toml-version/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-validator/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-x-keyword/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/editors/zed/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extensions/tombi-cargo-extension/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extensions/tombi-uv-extension/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rust/serde_tombi/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rust/tombi-cli/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rust/tombi/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/toml-test/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/xtask/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-wasm-compat/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-future/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extensions/tombi-extension-cargo/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extensions/tombi-extension-tombi/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extensions/tombi-extension-uv/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/crates/tombi-url/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tombi-wasm/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tombi-wasm/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

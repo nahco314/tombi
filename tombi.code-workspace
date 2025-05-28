@@ -8,58 +8,58 @@
       "path": "xtask"
     },
     {
-      "path": "crates/x-tombi"
+      "path": "crates/tombi-x-keyword"
     },
     {
-      "path": "crates/toml-version"
+      "path": "crates/tombi-toml-version"
     },
     {
-      "path": "crates/config"
+      "path": "crates/tombi-config"
     },
     {
-      "path": "crates/diagnostic"
+      "path": "crates/tombi-diagnostic"
     },
     {
-      "path": "crates/text"
+      "path": "crates/tombi-text"
     },
     {
-      "path": "crates/lexer"
+      "path": "crates/tombi-lexer"
     },
     {
-      "path": "crates/rg-tree"
+      "path": "crates/tombi-rg-tree"
     },
     {
-      "path": "crates/syntax"
+      "path": "crates/tombi-syntax"
     },
     {
-      "path": "crates/ast"
+      "path": "crates/tombi-ast"
     },
     {
-      "path": "crates/ast-editor"
+      "path": "crates/tombi-ast-editor"
     },
     {
-      "path": "crates/parser"
+      "path": "crates/tombi-parser"
     },
     {
-      "path": "crates/document-tree"
+      "path": "crates/tombi-document-tree"
     },
     {
-      "path": "crates/document"
+      "path": "crates/tombi-document"
     },
     {
-      "path": "crates/schema-store"
+      "path": "crates/tombi-schema-store"
     },
     {
-      "path": "crates/formatter"
+      "path": "crates/tombi-formatter"
     },
     {
-      "path": "crates/validator"
+      "path": "crates/tombi-validator"
     },
     {
-      "path": "crates/linter"
+      "path": "crates/tombi-linter"
     },
     {
-      "path": "crates/server"
+      "path": "crates/tombi-lsp"
     },
     {
       "path": "rust/tombi-cli"

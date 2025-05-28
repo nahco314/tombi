@@ -3,7 +3,9 @@ use std::borrow::Cow;
 use futures::{future::BoxFuture, FutureExt};
 use tombi_schema_store::{Accessor, CurrentSchema, SchemaContext, SchemaUrl};
 
-use super::{GetHoverContent, HoverContent};
+use super::{
+    constraints::ValueConstraints, display_value::DisplayValue, GetHoverContent, HoverContent,
+};
 
 pub fn get_all_of_hover_content<'a: 'b, 'b, T>(
     value: &'a T,
@@ -22,6 +24,11 @@ where
         let mut title_description_set = ahash::AHashSet::new();
         let mut value_type_set = indexmap::IndexSet::new();
         let mut constraints = None;
+        let default = all_of_schema
+            .default
+            .as_ref()
+            .and_then(|default| DisplayValue::try_from(default).ok());
+
         for referable_schema in all_of_schema.schemas.write().await.iter_mut() {
             let Ok(Some(current_schema)) = referable_schema
                 .resolve(
@@ -78,6 +85,19 @@ where
         } else {
             tombi_schema_store::ValueType::AllOf(value_type_set.into_iter().collect())
         };
+
+        if let Some(default) = default {
+            if let Some(constraints) = constraints.as_mut() {
+                if constraints.default.is_none() {
+                    constraints.default = Some(default);
+                }
+            } else {
+                constraints = Some(ValueConstraints {
+                    default: Some(default),
+                    ..Default::default()
+                });
+            }
+        }
 
         Some(HoverContent {
             title,

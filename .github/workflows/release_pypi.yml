@@ -211,3 +211,19 @@ jobs:
       - uses: geekyeggo/delete-artifact@v5
         with:
             name: tombi-py-wheels-${{ env.TOMBI_VERSION }}-*
+
+  update-dependents:
+    name: Notify pre-commit mirror
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Update pre-commit mirror"
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.TOMBI_PRE_COMMIT_PAT }}
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: 'tombi-pre-commit',
+              workflow_id: 'main.yml',
+              ref: 'main',
+            })

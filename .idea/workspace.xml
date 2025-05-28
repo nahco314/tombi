@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/Cargo.toml">
+      <package file="$PROJECT_DIR$/rust/serde_tombi">
+        <enabledFeature name="default" />
+        <enabledFeature name="wasm" />
+      </package>
+      <package file="$PROJECT_DIR$/rust/tombi">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-ast">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-ast-editor">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/rust/tombi-cli">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-config">
+        <enabledFeature name="serde" />
+        <enabledFeature name="default" />
+        <enabledFeature name="clap" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-date-time">
+        <enabledFeature name="chrono" />
+        <enabledFeature name="serde" />
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-diagnostic">
+        <enabledFeature name="lsp" />
+        <enabledFeature name="tower-lsp" />
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-document">
+        <enabledFeature name="serde" />
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-document-tree">
+        <enabledFeature name="default" />
+        <enabledFeature name="diagnostic" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-extension">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/extensions/tombi-extension-cargo">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/extensions/tombi-extension-tombi">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/extensions/tombi-extension-uv">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-formatter">
+        <enabledFeature name="default" />
+        <enabledFeature name="wasm" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-future">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-json">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-json-lexer">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-json-syntax">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-json-value">
+        <enabledFeature name="serde" />
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-lexer">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-linter">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-lsp">
+        <enabledFeature name="default" />
+        <enabledFeature name="clap" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-parser">
+        <enabledFeature name="default" />
+        <enabledFeature name="diagnostic" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-rg-tree">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-schema-store">
+        <enabledFeature name="default" />
+        <enabledFeature name="reqwest" />
+        <enabledFeature name="gloo-net" />
+        <enabledFeature name="native" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-syntax">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-test-lib">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-text">
+        <enabledFeature name="lsp" />
+        <enabledFeature name="serde" />
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-toml-text">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-toml-version">
+        <enabledFeature name="serde" />
+        <enabledFeature name="default" />
+        <enabledFeature name="clap" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-url">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-validator">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/tombi-wasm">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-wasm-compat">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/crates/tombi-x-keyword">
+        <enabledFeature name="serde" />
+        <enabledFeature name="default" />
+        <enabledFeature name="clap" />
+      </package>
+      <package file="$PROJECT_DIR$/toml-test">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/xtask">
+        <enabledFeature name="default" />
+      </package>
+      <package file="$PROJECT_DIR$/editors/zed">
+        <enabledFeature name="default" />
+      </package>
+    </cargoProject>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e672bd14-f796-4adf-8aff-c638f3d41a53" name="変更" comment="fix(tombi-json): handle UTF-16 surrogate pairs in unicode escape sequences">
+      <change afterPath="$PROJECT_DIR$/.idea/LanguageServersSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/developer-tools.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2025_05_24_18_04______.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2025_05_24_18_04_の_マージ_前の未コミットの変更_[変更]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2025_05_28_22_31______.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2025_05_28_22_31_の_マージ_前の未コミットの変更_[変更]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2025_05_28_22_33______.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2025_05_28_22_33_の_チェックアウト_前の未コミットの変更_[変更]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2025_05_28_22_36_の_マージ_前の未コミットの変更_[変更]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/tombi.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CLAUDE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-future/Cargo.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-future/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-future/src/lib.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-future/src/on_native.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-future/src/on_wasm.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-linter/src/severity.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_definition.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/display_value.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-url/Cargo.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-url/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-url/src/lib.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-url/src/on_native.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crates/tombi-url/src/on_wasm.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/src/components/CodeTabs.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/src/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/extensions/tombi-extension-tombi/src/goto_definition.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/foro.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rust/tombi-cli/t.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rust/tombi-cli/tmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/t.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tombi-cli-0.3.38-x86_64-unknown-linux-musl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tombi-wasm/pkg/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tombi-wasm/pkg/tombi_wasm.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tombi-wasm/pkg/tombi_wasm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tombi-wasm/pkg/tombi_wasm_bg.wasm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tombi-wasm/pkg/tombi_wasm_bg.wasm.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tst/dirty" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/release_npm.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/release_npm.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/release_pypi.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/release_pypi.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/array.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/array.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/array_of_table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/array_of_table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/inline_table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/inline_table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/key_value.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/key_value.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/root.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/root.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/value.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/edit/value.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/rule/root_table_keys_order.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/rule/root_table_keys_order.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast-editor/src/rule/table_keys_order.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast-editor/src/rule/table_keys_order.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast/src/impls/comment.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast/src/impls/comment.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-ast/src/support/node.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-ast/src/support/node.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-config/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-config/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-config/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-config/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-config/src/lint.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-config/src/lint.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-config/src/types/schema_catalog_path.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-config/src/types/schema_catalog_path.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-date-time/tests/deserialize.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-date-time/tests/deserialize.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-date-time/tests/serialize.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-date-time/tests/serialize.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-document-tree/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-document-tree/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-document/src/value.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-document/src/value.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-document/src/value/table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-document/src/value/table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-extension/src/definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-extension/src/definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-extension/src/document_link.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-extension/src/document_link.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-formatter/src/format/value/inline_table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-formatter/src/format/value/inline_table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-formatter/src/format/value/string.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-formatter/src/format/value/string.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-formatter/src/formatter.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-formatter/src/formatter.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-formatter/src/formatter/definitions.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-formatter/src/formatter/definitions.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-formatter/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-formatter/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-json-lexer/src/cursor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-json-lexer/src/cursor.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-json-value/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-json-value/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-json-value/src/map.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-json-value/src/map.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-json/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-json/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-json/src/node.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-json/src/node.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-json/src/parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-json/src/parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-linter/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-linter/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-linter/src/linter.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-linter/src/linter.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-linter/src/rule/key_empty.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-linter/src/rule/key_empty.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-linter/src/warning.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/backend.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/backend.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/completion.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/completion.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/completion/comment.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/completion/comment.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/completion/completion_edit.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/completion/completion_edit.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/completion/value/table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/completion/value/table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/array.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/array.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/boolean.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/boolean.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/float.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/float.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/integer.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/integer.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/local_date.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/local_date.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/local_date_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/local_date_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/local_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/local_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/offset_date_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/offset_date_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/string.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/string.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/goto_type_definition/value/table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/completion.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/completion.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/diagnostic.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/diagnostic.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/document_link.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/document_link.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/folding_range.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/folding_range.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/formatting.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/formatting.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/get_toml_version.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/get_toml_version.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/goto_declaration.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/goto_declaration.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/goto_definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/goto_definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/goto_type_definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/goto_type_definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/hover.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/handler/hover.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/all_of.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/all_of.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/any_of.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/any_of.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/constraints.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/constraints.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/default_value.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/one_of.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/one_of.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/array.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/array.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/boolean.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/boolean.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/float.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/float.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/integer.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/integer.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/local_date.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/local_date.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/local_date_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/local_date_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/local_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/local_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/offset_date_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/offset_date_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/string.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/string.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/hover/value/table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/tests/document_link.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/tests/document_link.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/tests/goto_declaration.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/tests/goto_declaration.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/tests/goto_definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/tests/goto_definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-lsp/tests/goto_type_definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-lsp/tests/goto_type_definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-parser/src/error.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-parser/src/error.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-parser/src/parse/inline_table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-parser/src/parse/inline_table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/accessor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/accessor.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/json/catalog.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/json/catalog.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/macros.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/macros.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/all_of_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/all_of_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/any_of_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/any_of_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/array_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/array_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/boolean_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/boolean_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/document_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/document_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/float_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/float_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/integer_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/integer_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/local_date_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/local_date_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/local_date_time_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/local_date_time_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/local_time_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/local_time_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/offset_date_time_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/offset_date_time_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/one_of_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/one_of_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/referable_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/referable_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/schema_context.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/schema_context.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/schema_url.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/schema_url.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/string_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/string_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/table_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/table_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/value_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/schema/value_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/src/store.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/src/store.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-schema-store/tests/test_tombi_schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-schema-store/tests/test_tombi_schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-toml-text/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-toml-text/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/all_of.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/all_of.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/any_of.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/any_of.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/array.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/array.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/boolean.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/boolean.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/float.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/float.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/integer.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/integer.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/local_date.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/local_date.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/local_date_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/local_date_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/local_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/local_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/offset_date_time.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/offset_date_time.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/one_of.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/one_of.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/string.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/string.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/table.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/table.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crates/tombi-validator/src/validate/value.rs" beforeDir="false" afterPath="$PROJECT_DIR$/crates/tombi-validator/src/validate/value.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/routes/docs/configuration/index.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/routes/docs/configuration/index.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/routes/docs/extensions/tombi-cargo-extension.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/routes/docs/extensions/tombi-extension-cargo.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/routes/docs/extensions/tombi-uv-extension.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/routes/docs/extensions/tombi-extension-uv.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/src/routes/docs/installation.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/src/routes/docs/installation.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editors/vscode/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/editors/vscode/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editors/vscode/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/editors/vscode/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editors/zed/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/editors/zed/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/document_link.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/document_link.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/goto_declaration.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/goto_declaration.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/goto_definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/goto_definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-cargo/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-tombi/src/document_link.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-tombi/src/document_link.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-tombi/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-tombi/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-uv/src/goto_declaration.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-uv/src/goto_declaration.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-uv/src/goto_definition.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-uv/src/goto_definition.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extensions/tombi-extension-uv/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/extensions/tombi-extension-uv/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python/tombi-beta/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/python/tombi-beta/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rust/serde_tombi/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/rust/serde_tombi/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rust/serde_tombi/src/config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rust/serde_tombi/src/config.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rust/serde_tombi/src/de.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rust/serde_tombi/src/de.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rust/serde_tombi/src/de/error.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rust/serde_tombi/src/de/error.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rust/serde_tombi/src/document.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rust/serde_tombi/src/document.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rust/tombi-cli/src/error.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rust/tombi-cli/src/error.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tombi.code-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/tombi.code-workspace" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tombi.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/tombi.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tombi.toml" beforeDir="false" afterPath="$PROJECT_DIR$/tombi.toml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="RsBuildProfile:dev" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nahco314&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nahco314/tombi&quot;,
+    &quot;accountId&quot;: &quot;c4a9a7e8-1074-44e5-b265-027e9c401369&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="DgzuRLmg" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2x84wTi3wemmgc4qbCpFEIehjHI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cargo.Build tombi_schema_store.executor": "Run",
+    "Cargo.Run tombi-lexer.executor": "Run",
+    "Cargo.Run tombi-wasm.executor": "Run",
+    "Cargo.Run tombi.executor": "Run",
+    "Cargo.Test lib::tests.executor": "Run",
+    "Cargo.Test tests::test_surrogate_pairs.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "foro-tombi をマージ中",
+    "last_opened_file_path": "/home/nahco314/RustroverProjects/tombi/crates/tombi-url",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "org.rust.first.attach.projects": "true",
+    "settings.editor.selected.configurable": "language.rust.cargo.check",
+    "ts.external.directory.path": "/home/nahco314/.local/share/JetBrains/Toolbox/apps/rustrover/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/crates/tombi-url" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/rust" />
+      <recent name="$PROJECT_DIR$/crates/tombi-wasm-compat/src/box_future" />
+      <recent name="$PROJECT_DIR$/crates/tombi-wasm-compat" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/crates" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Cargo.Build tombi_schema_store">
+    <configuration name="Build tombi_schema_store" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="buildProfileId" value="dev" />
+      <option name="command" value="build --package tombi-schema-store --lib" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run decode" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="command" value="run --package toml-test --bin decode" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run tombi-lexer" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="buildProfileId" value="dev" />
+      <option name="command" value="run --package tombi-lexer --bin tombi-lexer" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run tombi-wasm" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="command" value="run --package tombi-wasm --bin tombi-wasm" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run tombi" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="command" value="run --package tombi-cli --bin tombi" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run xtask" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="command" value="run --package xtask --bin xtask" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test lib::tests" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="command" value="test --package tombi-json --lib tests" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test tests::test_surrogate_pairs" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="buildProfileId" value="test" />
+      <option name="command" value="test --package tombi-json --lib tests::test_surrogate_pairs -- --exact" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test tombi" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="buildProfileId" value="test" />
+      <option name="command" value="test --workspace" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo.Test tests::test_surrogate_pairs" />
+        <item itemvalue="Cargo.Test lib::tests" />
+        <item itemvalue="Cargo.Run tombi-wasm" />
+        <item itemvalue="Cargo.Run tombi-lexer" />
+        <item itemvalue="Cargo.Build tombi_schema_store" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="デフォルトタスク">
+      <changelist id="e672bd14-f796-4adf-8aff-c638f3d41a53" name="変更" comment="" />
+      <created>1747306605896</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747306605896</updated>
+      <workItem from="1747306607433" duration="12549000" />
+      <workItem from="1747320155297" duration="10719000" />
+      <workItem from="1747403425663" duration="2614000" />
+      <workItem from="1747444774185" duration="3913000" />
+      <workItem from="1747471561908" duration="105000" />
+      <workItem from="1747472944053" duration="16927000" />
+      <workItem from="1747541545955" duration="144000" />
+      <workItem from="1747541714541" duration="4339000" />
+      <workItem from="1747548260132" duration="1383000" />
+      <workItem from="1747588284102" duration="11194000" />
+      <workItem from="1747637322213" duration="1447000" />
+      <workItem from="1747645575256" duration="11204000" />
+      <workItem from="1747657252882" duration="7481000" />
+      <workItem from="1747718484130" duration="6066000" />
+      <workItem from="1747803950629" duration="3394000" />
+      <workItem from="1747860941187" duration="35000" />
+      <workItem from="1748058305115" duration="1767000" />
+      <workItem from="1748062736781" duration="523000" />
+      <workItem from="1748063309999" duration="2158000" />
+      <workItem from="1748071653861" duration="246000" />
+      <workItem from="1748071916496" duration="6280000" />
+      <workItem from="1748078683257" duration="328000" />
+      <workItem from="1748079039591" duration="12141000" />
+      <workItem from="1748181828331" duration="25371000" />
+      <workItem from="1748428671811" duration="13329000" />
+    </task>
+    <task id="LOCAL-00001" summary="perf: change \d to [0-9]">
+      <option name="closed" value="true" />
+      <created>1747308280418</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747308280418</updated>
+    </task>
+    <task id="LOCAL-00002" summary="perf: optimize tracing_subscriber initialization">
+      <option name="closed" value="true" />
+      <created>1747318086748</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747318086748</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix: direct install.sh toward musl">
+      <option name="closed" value="true" />
+      <created>1747319012273</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747319012273</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix: direct install.sh toward musl">
+      <option name="closed" value="true" />
+      <created>1747323570144</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747323570144</updated>
+    </task>
+    <task id="LOCAL-00005" summary="chore: remove release for non-musl">
+      <option name="closed" value="true" />
+      <created>1747325238253</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747325238253</updated>
+    </task>
+    <task id="LOCAL-00006" summary="refactor: prevent the printer from requesting a Copy and make it use &amp;mut">
+      <option name="closed" value="true" />
+      <created>1747327366863</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747327366863</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refactor: refactor schema store methods for clarity and consistency&#10;&#10;Replaced &quot;try_*&quot; methods with clearer and consistent naming conventions like &quot;get_*&quot; and &quot;build_*&quot; throughout the codebase. Unified method implementations to improve readability, reduce redundancy, and align with better practices. This change ensures more explicit expectations of results without unnecessary &quot;try&quot; prefix semantics.">
+      <option name="closed" value="true" />
+      <created>1747492915232</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747492915232</updated>
+    </task>
+    <task id="LOCAL-00008" summary="chore: add rustfmt.toml">
+      <option name="closed" value="true" />
+      <created>1747492928600</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1747492928600</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: support raw schema content">
+      <option name="closed" value="true" />
+      <created>1747497432198</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1747497432198</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: make schema content cow">
+      <option name="closed" value="true" />
+      <created>1747544623117</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1747544623117</updated>
+    </task>
+    <task id="LOCAL-00011" summary="wip: wasm support">
+      <option name="closed" value="true" />
+      <created>1747599185843</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1747599185843</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: wasm support">
+      <option name="closed" value="true" />
+      <created>1747658388618</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1747658388618</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: fix and cleanup">
+      <option name="closed" value="true" />
+      <created>1747659686426</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1747659686426</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: expose HttpClient and DefaultClient in public API">
+      <option name="closed" value="true" />
+      <created>1747661100133</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1747661100133</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: fix member placement of workspace">
+      <option name="closed" value="true" />
+      <created>1747662914826</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1747662914826</updated>
+    </task>
+    <task id="LOCAL-00016" summary="some fix">
+      <option name="closed" value="true" />
+      <created>1748070751952</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748070751952</updated>
+    </task>
+    <task id="LOCAL-00017" summary="chore: add rustfmt.toml">
+      <option name="closed" value="true" />
+      <created>1748073020640</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748073020640</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: add `tombi-future` crate and replace `futures::BoxFuture` usage">
+      <option name="closed" value="true" />
+      <created>1748075850843</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748075850843</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: add `tombi-future` crate and replace `futures::BoxFuture` usage">
+      <option name="closed" value="true" />
+      <created>1748077963511</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1748077963511</updated>
+    </task>
+    <task id="LOCAL-00020" summary="refactor: rename SchemaStore's methods">
+      <option name="closed" value="true" />
+      <created>1748098076071</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1748098076071</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fix: reflect reviews">
+      <option name="closed" value="true" />
+      <created>1748100669555</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1748100669555</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat: add `tombi-url`">
+      <option name="closed" value="true" />
+      <created>1748183570936</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1748183570936</updated>
+    </task>
+    <task id="LOCAL-00023" summary="refactor: refactor HTTP client to support WASM and native targets">
+      <option name="closed" value="true" />
+      <created>1748195582532</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1748195582532</updated>
+    </task>
+    <task id="LOCAL-00024" summary="refactor: refactor HTTP error handling with structured FetchError">
+      <option name="closed" value="true" />
+      <created>1748322841409</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1748322841409</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix(tombi-json): handle UTF-16 surrogate pairs in unicode escape sequences">
+      <option name="closed" value="true" />
+      <created>1748436935659</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1748436935659</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="perf: change \d to [0-9]" />
+    <MESSAGE value="perf: optimize tracing_subscriber initialization" />
+    <MESSAGE value="fix: direct install.sh toward musl" />
+    <MESSAGE value="chore: remove release for non-musl" />
+    <MESSAGE value="refactor: prevent the printer from requesting a Copy and make it use &amp;mut" />
+    <MESSAGE value="refactor: refactor schema store methods for clarity and consistency&#10;&#10;Replaced &quot;try_*&quot; methods with clearer and consistent naming conventions like &quot;get_*&quot; and &quot;build_*&quot; throughout the codebase. Unified method implementations to improve readability, reduce redundancy, and align with better practices. This change ensures more explicit expectations of results without unnecessary &quot;try&quot; prefix semantics." />
+    <MESSAGE value="feat: support raw schema content" />
+    <MESSAGE value="feat: make schema content cow" />
+    <MESSAGE value="wip: wasm support" />
+    <MESSAGE value="feat: wasm support" />
+    <MESSAGE value="fix: fix and cleanup" />
+    <MESSAGE value="fix: " />
+    <MESSAGE value="fix: expose HttpClient and DefaultClient in public API" />
+    <MESSAGE value="fix: fix member placement of workspace" />
+    <MESSAGE value="some fix" />
+    <MESSAGE value="chore: add rustfmt.toml" />
+    <MESSAGE value="feat: add `tombi-future` crate and replace `futures::BoxFuture` usage" />
+    <MESSAGE value="refactor: rename SchemaStore's methods" />
+    <MESSAGE value="fix: reflect reviews" />
+    <MESSAGE value="feat: add `tombi-url`" />
+    <MESSAGE value="refactor: refactor HTTP client to support WASM and native targets" />
+    <MESSAGE value="refactor: refactor HTTP error handling with structured FetchError" />
+    <MESSAGE value="fix(tombi-json): handle UTF-16 surrogate pairs in unicode escape sequences" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(tombi-json): handle UTF-16 surrogate pairs in unicode escape sequences" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

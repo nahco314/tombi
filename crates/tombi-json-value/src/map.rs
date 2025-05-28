@@ -89,11 +89,6 @@ where
         self.inner.iter_mut()
     }
 
-    /// Returns an iterator over the entries of the map
-    pub fn into_iter(self) -> indexmap::map::IntoIter<K, V> {
-        self.inner.into_iter()
-    }
-
     /// Returns an iterator over the keys of the map
     pub fn keys(&self) -> impl Iterator<Item = &K> {
         self.inner.keys()

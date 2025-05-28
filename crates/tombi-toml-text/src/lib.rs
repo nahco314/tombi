@@ -46,16 +46,16 @@ pub fn try_from_bare_key(value: &str, _toml_version: TomlVersion) -> Result<Stri
 
     // TODO: In toml `v1.1.0`, bare key unicode support was not merged and will likely be deferred for discussion in `v1.2.0`.
     //       See: https://github.com/toml-lang/toml/issues/954#issuecomment-1932268939
-    if false // toml_version >= TomlVersion::V1_1_0_Preview
-        || value.chars().all(|c| {
-            matches!(
-                c,
-                'a'..='z' | 'A'..='Z' | '0'..='9' | '_' | '-'
-                // FIXME: This code can be removed if we can handle keys of floats correctly.
-                | '.'
-            )
-        })
-    {
+    if
+    // toml_version >= TomlVersion::V1_1_0_Preview ||
+    value.chars().all(|c| {
+        matches!(
+            c,
+            'a'..='z' | 'A'..='Z' | '0'..='9' | '_' | '-'
+            // FIXME: This code can be removed if we can handle keys of floats correctly.
+            | '.'
+        )
+    }) {
         Ok(value.to_string())
     } else {
         Err(ParseError::UnicodeKey)

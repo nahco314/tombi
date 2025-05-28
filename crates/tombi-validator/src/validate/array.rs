@@ -2,8 +2,8 @@ use std::borrow::Cow;
 
 use tombi_diagnostic::SetDiagnostics;
 use tombi_document_tree::ValueImpl;
+use tombi_future::{BoxFuture, Boxable};
 use tombi_schema_store::{CurrentSchema, DocumentSchema, ValueSchema, ValueType};
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
 
 use super::{validate_all_of, validate_any_of, validate_one_of, Validate};
 
@@ -29,7 +29,7 @@ impl Validate for tombi_document_tree::Array {
                         ..
                     })) = schema_context
                         .store
-                        .get_document_schema(sub_schema_url)
+                        .try_get_document_schema(sub_schema_url)
                         .await
                     {
                         return self

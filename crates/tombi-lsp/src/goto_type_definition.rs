@@ -45,18 +45,6 @@ pub struct TypeDefinition {
 }
 
 impl TypeDefinition {
-    pub fn new(
-        schema_url: SchemaUrl,
-        schema_accessors: Vec<tombi_schema_store::SchemaAccessor>,
-        range: tombi_text::Range,
-    ) -> Self {
-        Self {
-            schema_url,
-            schema_accessors,
-            range,
-        }
-    }
-
     pub fn update_range(
         mut self,
         accessors: &[tombi_schema_store::Accessor],

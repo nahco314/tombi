@@ -195,6 +195,61 @@ mod document_link_tests {
             ]));
         );
     }
+
+    mod tombi_schema {
+        use super::*;
+
+        test_document_link!(
+            #[tokio::test]
+            async fn tombi_schema_catalog_path(
+                r#"
+                [schema]
+                catalog = { path = "https://www.schemastore.org/api/json/catalog.json" }
+                "#,
+                project_root_path().join("tombi.toml"),
+            ) -> Ok(Some(vec![
+                {
+                    url: "https://www.schemastore.org/api/json/catalog.json",
+                    range: 1:20..1:69,
+                    tooltip: tombi_extension_tombi::DocumentLinkToolTip::Catalog,
+                }
+            ]));
+        );
+
+        test_document_link!(
+            #[tokio::test]
+            async fn tombi_schemas_path(
+                r#"
+                [[schemas]]
+                path = "tombi.schema.json"
+                "#,
+                project_root_path().join("tombi.toml"),
+            ) -> Ok(Some(vec![
+                {
+                    path: project_root_path().join("tombi.schema.json"),
+                    range: 1:8..1:25,
+                    tooltip: tombi_extension_tombi::DocumentLinkToolTip::Schema,
+                }
+            ]));
+        );
+
+        test_document_link!(
+            #[tokio::test]
+            async fn tombi_schemas_remote_path(
+                r#"
+                [[schemas]]
+                path = "https://json.schemastore.org/cargo-make.json"
+                "#,
+                project_root_path().join("tombi.toml"),
+            ) -> Ok(Some(vec![
+                {
+                    url: "https://json.schemastore.org/cargo-make.json",
+                    range: 1:8..1:52,
+                    tooltip: tombi_extension_tombi::DocumentLinkToolTip::Schema,
+                }
+            ]));
+        );
+    }
 }
 
 #[macro_export]

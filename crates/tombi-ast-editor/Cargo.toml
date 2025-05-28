@@ -15,6 +15,7 @@ regex.workspace = true
 thiserror.workspace = true
 tombi-ast.workspace = true
 tombi-document-tree.workspace = true
+tombi-future.workspace = true
 tombi-parser.workspace = true
 tombi-schema-store.workspace = true
 tombi-syntax.workspace = true

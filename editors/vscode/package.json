@@ -5,8 +5,8 @@
   "description": "TOML Language Server",
   "publisher": "tombi-toml",
   "author": {
-    "name": "yassun7010",
-    "email": "yassun7010@outlook.com"
+    "name": "yn7010",
+    "email": "yn7010@outlook.com"
   },
   "repository": "https://github.com/tombi-toml/tombi",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "@types/vscode": "^1.93.0",
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.24.1",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.9"
   },
   "activationEvents": ["onLanguage:cargoLock"],
   "icon": "icon.png",

@@ -1,5 +1,9 @@
 #[derive(Debug, thiserror::Error)]
-pub enum Error {
+#[error(transparent)]
+pub struct Error(Box<InnerError>);
+
+#[derive(Debug, thiserror::Error)]
+enum InnerError {
     #[error(transparent)]
     Io(#[from] std::io::Error),
 
@@ -9,12 +13,6 @@ pub enum Error {
     #[error(transparent)]
     SchemaStore(#[from] tombi_schema_store::Error),
 
-    #[error("cannot get schema url from document comment: {error} at {url_range}")]
-    DocumentCommentSchemaUrl {
-        error: tombi_schema_store::Error,
-        url_range: tombi_text::Range,
-    },
-
     #[error(transparent)]
     DocumentDeserialize(#[from] tombi_document::de::Error),
 
@@ -23,4 +21,46 @@ pub enum Error {
 
     #[error("{}", .0.iter().map(|e| e.to_string()).collect::<Vec<_>>().join(", "))]
     DocumentTree(Vec<tombi_document_tree::Error>),
+}
+
+impl From<InnerError> for Error {
+    fn from(error: InnerError) -> Self {
+        Self(Box::new(error))
+    }
+}
+
+impl From<std::io::Error> for Error {
+    fn from(error: std::io::Error) -> Self {
+        Self(Box::new(InnerError::Io(error)))
+    }
+}
+
+impl From<tombi_config::Error> for Error {
+    fn from(error: tombi_config::Error) -> Self {
+        Self(Box::new(InnerError::Config(error)))
+    }
+}
+
+impl From<Vec<tombi_parser::Error>> for Error {
+    fn from(errors: Vec<tombi_parser::Error>) -> Self {
+        Self(Box::new(InnerError::Parser(errors)))
+    }
+}
+
+impl From<Vec<tombi_document_tree::Error>> for Error {
+    fn from(errors: Vec<tombi_document_tree::Error>) -> Self {
+        Self(Box::new(InnerError::DocumentTree(errors)))
+    }
+}
+
+impl From<tombi_schema_store::Error> for Error {
+    fn from(error: tombi_schema_store::Error) -> Self {
+        Self(Box::new(InnerError::SchemaStore(error)))
+    }
+}
+
+impl From<tombi_document::de::Error> for Error {
+    fn from(error: tombi_document::de::Error) -> Self {
+        Self(Box::new(InnerError::DocumentDeserialize(error)))
+    }
 }

@@ -4,7 +4,9 @@ use futures::{future::BoxFuture, FutureExt};
 use itertools::Itertools;
 use tombi_schema_store::{Accessor, CurrentSchema, SchemaUrl};
 
-use super::{GetHoverContent, HoverContent};
+use super::{
+    constraints::ValueConstraints, display_value::DisplayValue, GetHoverContent, HoverContent,
+};
 
 pub fn get_one_of_hover_content<'a: 'b, 'b, T>(
     value: &'a T,
@@ -23,6 +25,10 @@ where
         let mut one_hover_contents = ahash::AHashSet::new();
         let mut valid_hover_contents = ahash::AHashSet::new();
         let mut value_type_set = indexmap::IndexSet::new();
+        let default = one_of_schema
+            .default
+            .as_ref()
+            .and_then(|default| DisplayValue::try_from(default).ok());
 
         for referable_schema in one_of_schema.schemas.write().await.iter_mut() {
             let Ok(Some(CurrentSchema { value_schema, .. })) = referable_schema
@@ -157,6 +163,22 @@ where
                 range: None,
             })
         }
+        .map(|mut hover_content| {
+            if let Some(default) = default {
+                if let Some(constraints) = hover_content.constraints.as_mut() {
+                    if constraints.default.is_none() {
+                        constraints.default = Some(default);
+                    }
+                } else {
+                    hover_content.constraints = Some(ValueConstraints {
+                        default: Some(default),
+                        ..Default::default()
+                    });
+                }
+            }
+
+            hover_content
+        })
     }
     .boxed()
 }

@@ -55,7 +55,7 @@ pub async fn handle_completion(
 
     let source_schema = backend
         .schema_store
-        .build_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
+        .resolve_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
         .await
         .ok()
         .flatten();
@@ -95,6 +95,7 @@ pub async fn handle_completion(
         get_completion_contents(
             root,
             position.into(),
+            &text_document.uri,
             &tombi_schema_store::SchemaContext {
                 toml_version,
                 root_schema,

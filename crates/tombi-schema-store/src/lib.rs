@@ -31,27 +31,18 @@ pub fn dig_accessors<'a>(
     if accessors.is_empty() {
         return None;
     }
-    let first_key = match &accessors[0] {
-        Accessor::Key(key) => key,
-        _ => return None,
-    };
-    let Some(mut value) = document_tree.get(first_key) else {
-        return None;
-    };
+    let first_key = accessors[0].as_key()?;
+    let mut value = document_tree.get(first_key)?;
     let mut current_accessor = &accessors[0];
     for accessor in accessors[1..].iter() {
         match (accessor, value) {
             (crate::Accessor::Key(key), tombi_document_tree::Value::Table(table)) => {
-                let Some(next_value) = table.get(key) else {
-                    return None;
-                };
+                let next_value = table.get(key)?;
                 current_accessor = accessor;
                 value = next_value;
             }
             (crate::Accessor::Index(index), tombi_document_tree::Value::Array(array)) => {
-                let Some(next_value) = array.get(*index) else {
-                    return None;
-                };
+                let next_value = array.get(*index)?;
                 current_accessor = accessor;
                 value = next_value;
             }

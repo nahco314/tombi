@@ -91,7 +91,7 @@ mod goto_declaration_tests {
                 use tombi_lsp::Backend;
                 use tower_lsp::{
                     lsp_types::{
-                        DidOpenTextDocumentParams, GotoDefinitionParams, GotoDefinitionResponse,
+                        DidOpenTextDocumentParams, GotoDefinitionParams,
                         PartialResultParams, TextDocumentIdentifier, TextDocumentItem,
                         TextDocumentPositionParams, Url, WorkDoneProgressParams,
                     },
@@ -147,51 +147,11 @@ mod goto_declaration_tests {
                 let expected_paths: Vec<std::path::PathBuf> = vec![$($expected_file_path.to_owned()),*];
 
                 match result {
-                    Some(def_links) => {
-                        match def_links {
-                            GotoDefinitionResponse::Link(links) => {
-                                assert!(!links.is_empty(), "Definition links were returned but empty");
-                                let target_paths: Vec<_> = links.iter()
-                                    .map(|link| link.target_uri.to_file_path()
-                                        .expect("Failed to convert URL to file path"))
-                                    .collect();
-
-                                pretty_assertions::assert_eq!(
-                                    target_paths,
-                                    expected_paths,
-                                    "Definition links point to unexpected schema paths\nExpected: {:?}\nActual: {:?}",
-                                    expected_paths,
-                                    target_paths
-                                );
-                            },
-                            GotoDefinitionResponse::Scalar(location) => {
-                                let target_path = location.uri.to_file_path()
-                                    .expect("Failed to convert URL to file path");
-
-                                pretty_assertions::assert_eq!(
-                                    vec![target_path.clone()],
-                                    expected_paths,
-                                    "Definition link points to an unexpected schema path\nExpected: {:?}\nActual: {:?}",
-                                    expected_paths,
-                                    target_path
-                                );
-                            },
-                            GotoDefinitionResponse::Array(locations) => {
-                                assert!(!locations.is_empty(), "Definition locations were returned but empty");
-                                let target_paths: Vec<_> = locations.iter()
-                                    .map(|loc| loc.uri.to_file_path()
-                                        .expect("Failed to convert URL to file path"))
-                                    .collect();
-
-                                pretty_assertions::assert_eq!(
-                                    target_paths,
-                                    expected_paths,
-                                    "Definition locations point to unexpected schema paths\nExpected: {:?}\nActual: {:?}",
-                                    expected_paths,
-                                    target_paths
-                                );
-                            }
-                        }
+                    Some(definition_links) => {
+                        pretty_assertions::assert_eq!(
+                            definition_links.into_iter().map(|link| link.uri.to_file_path().unwrap()).collect::<Vec<_>>(),
+                            expected_paths,
+                        );
                     },
                     None => {
                         if !expected_paths.is_empty() {

@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [
-  { name = "yassun7010", email = "yassun7010@outlook.com" },
+  { name = "yn7010", email = "yn7010@outlook.com" },
 ]
 dependencies = []
 

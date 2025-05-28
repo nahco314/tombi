@@ -76,17 +76,13 @@ where
     if keys.is_empty() {
         return None;
     }
-    let Some((mut key, mut value)) = document_tree.get_key_value(keys[0]) else {
-        return None;
-    };
+    let (mut key, mut value) = document_tree.get_key_value(keys[0])?;
     for k in keys[1..].iter() {
         let crate::Value::Table(table) = value else {
             return None;
         };
 
-        let Some((next_key, next_value)) = table.get_key_value(*k) else {
-            return None;
-        };
+        let (next_key, next_value) = table.get_key_value(*k)?;
 
         key = next_key;
         value = next_value;

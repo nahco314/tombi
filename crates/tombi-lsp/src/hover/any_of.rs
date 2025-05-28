@@ -4,7 +4,9 @@ use futures::{future::BoxFuture, FutureExt};
 use itertools::Itertools;
 use tombi_schema_store::{Accessor, CurrentSchema, SchemaContext, SchemaUrl};
 
-use super::{GetHoverContent, HoverContent};
+use super::{
+    constraints::ValueConstraints, display_value::DisplayValue, GetHoverContent, HoverContent,
+};
 
 pub fn get_any_of_hover_content<'a: 'b, 'b, T>(
     value: &'a T,
@@ -23,6 +25,10 @@ where
         let mut any_hover_contents = vec![];
         let mut valid_hover_contents = vec![];
         let mut value_type_set = indexmap::IndexSet::new();
+        let default = any_of_schema
+            .default
+            .as_ref()
+            .and_then(|default| DisplayValue::try_from(default).ok());
 
         for referable_schema in any_of_schema.schemas.write().await.iter_mut() {
             let Ok(Some(CurrentSchema { value_schema, .. })) = referable_schema
@@ -104,12 +110,13 @@ where
             }
         }
 
-        if let Some(hover_content) = valid_hover_contents.into_iter().next() {
-            Some(hover_content)
+        let mut hover_content = if let Some(hover_content) = valid_hover_contents.into_iter().next()
+        {
+            hover_content
         } else if let Some(hover_content) = any_hover_contents.into_iter().next() {
-            Some(hover_content)
+            hover_content
         } else {
-            Some(HoverContent {
+            HoverContent {
                 title: None,
                 description: None,
                 accessors: tombi_schema_store::Accessors::new(accessors.to_vec()),
@@ -117,8 +124,23 @@ where
                 constraints: None,
                 schema_url: Some(schema_url.to_owned()),
                 range: None,
-            })
+            }
+        };
+
+        if let Some(default) = default {
+            if let Some(constraints) = hover_content.constraints.as_mut() {
+                if constraints.default.is_none() {
+                    constraints.default = Some(default);
+                }
+            } else {
+                hover_content.constraints = Some(ValueConstraints {
+                    default: Some(default),
+                    ..Default::default()
+                });
+            }
         }
+
+        Some(hover_content)
     }
     .boxed()
 }

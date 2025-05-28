@@ -1,4 +1,4 @@
-use tower_lsp::lsp_types::{CompletionTextEdit, InsertTextFormat, TextEdit};
+use tower_lsp::lsp_types::{CompletionTextEdit, InsertTextFormat, TextEdit, Url};
 
 use super::CompletionHint;
 
@@ -247,16 +247,29 @@ impl CompletionEdit {
         })
     }
 
-    pub fn new_comment_schema_directive(position: tombi_text::Position) -> Option<Self> {
-        let tombi_schema_url = "https://json.schemastore.org/tombi.json";
+    pub fn new_comment_schema_directive(
+        position: tombi_text::Position,
+        prefix_range: tombi_text::Range,
+        text_document_uri: &Url,
+    ) -> Option<Self> {
+        let file_name = std::path::Path::new(text_document_uri.path())
+            .file_stem() // "ccc"
+            .and_then(|s| s.to_str())
+            .unwrap_or("unknown")
+            .to_lowercase();
+
+        let schema_url = format!("https://json.schemastore.org/{file_name}.json",);
 
         Some(Self {
             insert_text_format: Some(InsertTextFormat::SNIPPET),
             text_edit: CompletionTextEdit::Edit(TextEdit {
-                new_text: format!("schema ${{0:{tombi_schema_url}}}"),
+                new_text: format!("schema ${{0:{schema_url}}}"),
                 range: tombi_text::Range::at(position).into(),
             }),
-            additional_text_edits: None,
+            additional_text_edits: Some(vec![TextEdit {
+                range: prefix_range.into(),
+                new_text: "".to_string(),
+            }]),
         })
     }
 }

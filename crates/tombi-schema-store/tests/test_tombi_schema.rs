@@ -1,4 +1,5 @@
 use std::path::PathBuf;
+use std::str::FromStr;
 
 use tombi_schema_store::SchemaUrl;
 

@@ -1,6 +1,6 @@
 use itertools::Either;
 use tombi_document_tree::IntoDocumentTreeAndErrors;
-use tower_lsp::lsp_types::request::{GotoDeclarationParams, GotoDeclarationResponse};
+use tower_lsp::lsp_types::request::GotoDeclarationParams;
 use tower_lsp::lsp_types::TextDocumentPositionParams;
 
 use crate::handler::hover::{get_hover_accessors, get_hover_keys_and_range};
@@ -10,7 +10,7 @@ use crate::Backend;
 pub async fn handle_goto_declaration(
     backend: &Backend,
     params: GotoDeclarationParams,
-) -> Result<Option<GotoDeclarationResponse>, tower_lsp::jsonrpc::Error> {
+) -> Result<Option<Vec<tombi_extension::DefinitionLocation>>, tower_lsp::jsonrpc::Error> {
     tracing::info!("handle_goto_declaration");
     tracing::trace!(?params);
 
@@ -42,7 +42,7 @@ pub async fn handle_goto_declaration(
 
     let source_schema = backend
         .schema_store
-        .build_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
+        .resolve_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
         .await
         .ok()
         .flatten();

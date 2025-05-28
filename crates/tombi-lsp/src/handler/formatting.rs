@@ -35,7 +35,7 @@ pub async fn handle_formatting(
 
     let source_schema = backend
         .schema_store
-        .build_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
+        .resolve_source_schema_from_ast(&root, Some(Either::Left(&text_document.uri)))
         .await
         .ok()
         .flatten();

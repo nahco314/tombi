@@ -1,0 +1,44 @@
+import { Note } from "~/components/highlight";
+
+# tombi-extension-cargo
+
+Tombi is written in Rust, and we want to make the Rust development experience even better 🦀
+
+Experimentally, we provide additional features when editing `Cargo.toml` files.
+
+## Supported Features
+
+### Go to Definition
+For example, suppose you have a `Cargo.toml` like the one below:
+
+#### Go to workspace/crate definition from `dependencies`
+```toml
+[dependencies]
+serde = { workspace = true }
+tombi-ast = { workspace = true }
+```
+
+In this case, when your cursor is on `workspace`, executing "Go to Definition" will navigate you to the **workspace** definition or to the **crate** definition managed by the workspace.
+
+In the example above, for `serde` (an external crate), you'll be navigated to the **workspace** definition, while for `tombi-ast` (a crate managed by the workspace), you'll be navigated to the **crate** definition.
+
+<Note>
+If you consistently want to navigate to the **workspace**'s `Cargo.toml`, use "Go to Declaration".
+</Note> 
+
+#### Go to crate definition from `workspace.dependencies`
+```toml
+[workspace.dependencies]
+tombi-ast = { path = "crates/tombi-ast" }
+```
+
+In this case, when your cursor is on `path`, executing "Go to Definition" will navigate you to the crate definition.
+
+### Go to Declaration
+```toml
+[dependencies]
+serde = { workspace = true }
+tombi-ast = { workspace = true }
+```
+
+In this case, when your cursor is on `workspace`, executing "Go to Declaration" will navigate you to the crate definition.

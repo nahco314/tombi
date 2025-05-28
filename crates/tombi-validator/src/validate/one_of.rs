@@ -1,8 +1,8 @@
 use std::fmt::Debug;
 
 use tombi_document_tree::ValueImpl;
+use tombi_future::{BoxFuture, Boxable};
 use tombi_schema_store::{CurrentSchema, OneOfSchema, ValueSchema};
-use tombi_wasm_compat::box_future::{BoxFuture, Boxable};
 
 use super::Validate;
 use crate::validate::{all_of::validate_all_of, any_of::validate_any_of};
